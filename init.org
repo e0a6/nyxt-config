@@ -1,3 +1,15 @@
+#+title: Nyxt Configuration
+#+PROPERTY: header-args:lisp :tangle ~/.config/nyxt/init.lisp
+
+* Key bindings
+#+begin_src lisp
+;;; set keybinding to emacs
+(define-configuration buffer
+  ((default-modes (append '(nyxt::emacs-mode) %slot-default%))))
+#+end_src
+
+* Search engines
+#+begin_src lisp
 (defvar *my-search-engines*
   (list
    '("doi" "https://dx.doi.org/~a" "https://dx.doi.org/")
@@ -8,9 +20,10 @@
   ((search-engines (append %slot-default%
                            (mapcar (lambda (engine) (apply 'make-search-engine engine))
                                    *my-search-engines*)))))
-(define-configuration buffer
-  ((default-modes (append '(nyxt::emacs-mode) %slot-default%))))
+#+end_src
 
+* Appearance
+#+begin_src lisp
 ;;; Message buffer is the small line down below where all the messages
 ;;; are displayed. echo-area in Emacs parlance?
 (define-configuration window
@@ -78,3 +91,4 @@
                :color "black"
                :border-top "1px solid white")))))))
 
+#+end_src

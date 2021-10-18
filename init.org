@@ -23,7 +23,56 @@
 #+end_src
 
 * Appearance
+  Added a color scheme based on an offical [[https://nyxt.atlas.engineer/article/dark-theme.org][article]].
 #+begin_src lisp
+;;; Panel buffers are the same in regards to style.
+(define-configuration (internal-buffer panel-buffer)
+  ((style
+    (str:concat
+     %slot-default%
+     (cl-css:css
+      '((body
+         :background-color "black"
+         :color "lightgray")
+        (hr
+         :color "darkgray")
+        (a
+         :color "lightgray")
+        (.button
+         :color "lightgray"
+         :background-color "gray")))))))
+
+;;; Color config for prompt-buffer (minibuffer in Emacs parlance).
+(define-configuration prompt-buffer
+  ((style (str:concat
+           %slot-default%
+           (cl-css:css
+            '((body
+               :background-color "black"
+               :color "#808080")
+              ("#prompt-area"
+               :background-color "black")
+              ;; The area you input text in.
+              ("#input"
+               :background-color "white")
+              (".source-name"
+               :color "black"
+               :background-color "gray")
+              (".source-content"
+               :background-color "black")
+              (".source-content th"
+               :border "1px solid lightgray"
+               :background-color "black")
+              ;; The currently highlighted option.
+              ("#selection"
+               :background-color "#37a8e4"
+               :color "black")
+              (.marked :background-color "darkgray"
+                       :font-weight "bold"
+                       :color "white")
+              (.selected :background-color "black"
+                         :color "white")))))))
+
 ;;; Message buffer is the small line down below where all the messages
 ;;; are displayed. echo-area in Emacs parlance?
 (define-configuration window
@@ -34,61 +83,6 @@
       '((body
          :background-color "black"
          :color "white")))))))
-
-;;; Color config for prompt-buffer (minibuffer in Emacs parlance).
-(define-configuration prompt-buffer
-  ((style (str:concat
-           %slot-default%
-           (cl-css:css
-            '((body
-               :background-color "black"
-               :color "white")
-              ("#prompt-area"
-               :background-color "black")
-              ;; The area you input text in.
-              ("#input"
-               :background-color "white")
-              (".source-name"
-               :color "black"
-               :background-color "#556B2F")
-              (".source-content"
-               :background-color "black")
-              (".source-content th"
-               :border "1px solid #556B2F"
-               :background-color "black")
-              ;; The currently highlighted option.
-              ("#selection"
-               :background-color "#CD5C5C"
-               :color "black")
-              (.marked :background-color "#8B3A3A"
-                       :font-weight "bold"
-                       :color "white")
-              (.selected :background-color "black"
-                         :color "white")))))))
-
-;;; Status buffer is the strip above the message buffer/echo area.
-;;; Modeline in Emacs parlance.
-(define-configuration status-buffer
-  ((style (str:concat
-           %slot-default%
-           (cl-css:css
-            ;; Arrows on the left.
-            '(("#controls"
-               :border-top "1px solid white"
-               :background-color "#CD5C5C")
-              ;; To the right of the arrows.
-              ("#url"
-               :background-color "black"
-               :color "white"
-               :border-top "1px solid white")
-              ;; Far to the right.
-              ("#modes"
-               :background-color "black"
-               :border-top "1px solid white")
-              ;; The center segment.
-              ("#tabs"
-               :background-color "#CD5C5C"
-               :color "black"
-               :border-top "1px solid white")))))))
+#+end_src
 
 #+end_src

@@ -6,6 +6,12 @@
 ;;; set keybinding to emacs
 (define-configuration buffer
   ((default-modes (append '(nyxt::emacs-mode) %slot-default%))))
+
+;;; set C-s to search the page (see Keybinding configuration in Manual)
+(define-configuration buffer
+  ((override-map (let ((map (make-keymap "override-map")))
+                   (define-key map
+                     "C-s" 'nyxt/web-mode:search-buffer)))))
 #+end_src
 
 * Search engines
